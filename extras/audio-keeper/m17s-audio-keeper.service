@@ -1,0 +1,15 @@
+[Unit]
+Description=Keep the M17S analog audio path active
+After=alsa-restore.service sound.target
+ConditionPathExists=/dev/snd/pcmC0D0p
+
+[Service]
+Type=simple
+Group=audio
+Environment=M17S_AUDIO_VOLUME=200
+ExecStart=/usr/local/sbin/m17s-audio-keeper
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

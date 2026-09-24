@@ -1,0 +1,18 @@
+[Unit]
+Description=M17S first boot provisioning
+ConditionPathExists=!/etc/m17s-armbian/provisioned
+After=local-fs.target systemd-random-seed.service
+Before=ssh.service ssh.socket getty@tty1.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/m17s-firstboot --apply
+StandardInput=tty
+StandardOutput=tty
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+
+[Install]
+WantedBy=multi-user.target

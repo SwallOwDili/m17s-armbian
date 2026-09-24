@@ -1,0 +1,36 @@
+#!/bin/sh
+set -eu
+
+target_volume="${M17S_AUDIO_VOLUME:-200}"
+case "$target_volume" in
+    ''|*[!0-9]*)
+        echo "M17S_AUDIO_VOLUME must be an integer from 0 to 255" >&2
+        exit 2
+        ;;
+esac
+if [ "$target_volume" -gt 255 ]; then
+    echo "M17S_AUDIO_VOLUME must be an integer from 0 to 255" >&2
+    exit 2
+fi
+
+amixer -q -c 0 cset name='ACODEC Playback Switch' on
+amixer -q -c 0 sset 'AIU ACODEC SRC' I2S
+amixer -q -c 0 sset 'AIU ACODEC OUT EN' on
+amixer -q -c 0 cset name='ACODEC Playback Volume' 0,0
+
+aplay -q -D m17s_dmix -t raw -f S16_LE -c 2 -r 48000 /dev/zero &
+keeper_pid=$!
+trap 'kill -TERM "$keeper_pid" 2>/dev/null || true; wait "$keeper_pid" 2>/dev/null || true' INT TERM EXIT
+
+sleep 1
+level=0
+while [ "$level" -lt "$target_volume" ]; do
+    level=$((level + 10))
+    if [ "$level" -gt "$target_volume" ]; then
+        level="$target_volume"
+    fi
+    amixer -q -c 0 cset name='ACODEC Playback Volume' "$level,$level"
+    sleep 0.05
+done
+
+wait "$keeper_pid"

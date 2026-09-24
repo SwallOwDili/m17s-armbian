@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "m17s-armbian"
+version = "0.1.0rc3"
+description = "M17S Armbian image builder and vendor-boot-preserving installer"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+[project.scripts]
+m17s-image = "m17s_armbian.build:main"
+m17s-emmc = "m17s_armbian.installer:main"
+m17s-boot = "m17s_armbian.maintenance:main"
+m17s-firstboot = "m17s_armbian.firstboot:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "base_image": {
+    "name": "Armbian_26.11.0_amlogic_s905x_bookworm_6.12.109_server_2026.09.14.img.gz",
+    "url": "https://github.com/ophub/amlogic-s9xxx-armbian/releases/download/Armbian_bookworm_arm64_server_2026.09/Armbian_26.11.0_amlogic_s905x_bookworm_6.12.109_server_2026.09.14.img.gz",
+    "sha256": "c9d6057769dbabec1c7d32d41ef3021af581649c1db8e809e6d7a518f4076777",
+    "bytes": 844488701,
+    "github_asset_id": 562660110
+  },
+  "uboot": {
+    "url": "https://raw.githubusercontent.com/ophub/u-boot/f4eed0bac3a14d67c60b43be56445ad48601a56b/u-boot/amlogic/overload/u-boot-p212.bin",
+    "sha256": "c3b2065356e61cec05320e68010135a315e7d89d0e6d6dd212a55a28cf90f7e8",
+    "bytes": 606670,
+    "repository_commit": "f4eed0bac3a14d67c60b43be56445ad48601a56b",
+    "corresponding_source_status": "Exact dirty build source not identified; not a from-source U-Boot rebuild"
+  },
+  "builder_image": "ghcr.io/armbian/docker-armbian-build@sha256:6d7d57e949cc2c572f63811786eba7b4ac5d1a89fd98d66ce0bbf24baa74f6cc",
+  "builder_platform": "linux/arm64",
+  "source_date_epoch": 1789948800
+}

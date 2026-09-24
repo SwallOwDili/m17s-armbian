@@ -1,0 +1,216 @@
+{
+  "date": "2026-09-21",
+  "scope": "Single M17S sample; experimental userspace and CMA DTB, not stock rc2 image",
+  "hardware": {
+    "soc": "S905X",
+    "ram_gib": 2,
+    "kernel": "6.12.109-ophub",
+    "cma_mib": 768,
+    "display_output": "1920x1080@60"
+  },
+  "sample": {
+    "width": 3840,
+    "height": 2160,
+    "codec": "HEVC Main10",
+    "fps": "24000/1001",
+    "duration_seconds": 45.503,
+    "average_video_mbps": 62.95,
+    "software_decoded_frames": 1088,
+    "input_packets": 1090,
+    "video_reencoded": false
+  },
+  "configuration": {
+    "decoder": "v4l2h265dec",
+    "capture_io_mode": "dmabuf",
+    "display": "Weston + waylandsink",
+    "compressed_colorimetry_override": "bt2020 (diagnostic only, not tone mapping)",
+    "decoded_format": "NV12",
+    "decoded_colorimetry": "bt601",
+    "audio": "Stereo 48 kHz S16LE PCM, predecoded/downmixed outside box",
+    "audio_sink": "ALSA hw:0,0",
+    "audio_physical_output": "board analog audio jack",
+    "audio_offset_ns": 42000000
+  },
+  "wayland_with_pcm_before_analog_enable": {
+    "log_sha256": "6c532f592511b15526d0317b9ac2c9fb57ef5541e26656d17231259843abe8cb",
+    "runs": [
+      {
+        "iteration": 1,
+        "eos": true,
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.387,
+        "process_cpu_percent": 11.75
+      },
+      {
+        "iteration": 2,
+        "eos": true,
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.382,
+        "process_cpu_percent": 11.4
+      },
+      {
+        "iteration": 3,
+        "eos": true,
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.382,
+        "process_cpu_percent": 11.3
+      }
+    ]
+  },
+  "wayland_with_analog_audio": {
+    "log_sha256": "33375cc3d8fb0e99439e57a8f13659b270dc678b4d62e6c5c4e1b78e2764d928",
+    "runs": [
+      {
+        "iteration": 1,
+        "eos": true,
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.381,
+        "process_cpu_percent": 11.18
+      },
+      {
+        "iteration": 2,
+        "eos": true,
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.382,
+        "process_cpu_percent": 10.94
+      },
+      {
+        "iteration": 3,
+        "eos": true,
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.384,
+        "process_cpu_percent": 11.44
+      }
+    ]
+  },
+  "user_observations": {
+    "video": "Movie visible and motion smooth",
+    "analog_audio": "Audible and approximately synchronized"
+  },
+  "known_limits": [
+    "HDR color accuracy not validated; metadata override is not pixel conversion",
+    "Direct KMS path remained black despite frame counters",
+    "Open-GOP leading-reference/QoS and EOS undrained/timestamp warnings remain",
+    "No HDMI audio listening test",
+    "No native 4K output test",
+    "No full-length film or long-term stability acceptance",
+    "Experimental warm boot once stalled; physical cold power cycle recovered",
+    "TrueHD and DTS-HD MA decode to 8-channel PCM and AC-3 to 6-channel PCM verified; analog output is downmixed stereo, no Atmos rendering or passthrough acceptance",
+    "Cross-codec audio switching failed",
+    "Keeping the analog PCM path open plus 0.75-second fades removed per-playback start/end pops; one initial hardware power-up pop remains",
+    "User reports dark image; HDR-to-SDR tone mapping remains unvalidated"
+  ],
+  "statistics_note": "Rendered/dropped are pipeline counters, not independent proof of physical display or zero decoder errors; script clean_pass does not cover stderr or kernel warnings.",
+  "release_images_modified": false,
+  "native_audio_tests": {
+    "date": "2026-09-21",
+    "sample_tracks": 11,
+    "decode_location": "M17S CPU via GStreamer libav; video uses V4L2 hardware decode",
+    "output": "48 kHz S16LE stereo, board analog jack; not bitstream passthrough or Atmos rendering",
+    "fixed_track_runs": [
+      {
+        "codec": "truehd",
+        "log_sha256": "7d14e083f81e489f0920811fe444a618d0d05225e0712f05d3928873f607ccbf",
+        "audio_decoder": "avdec_truehd",
+        "audio_decoded_buffers": 54309,
+        "audio_decoded_caps": "audio/x-raw, format=(string)S32LE, layout=(string)interleaved, rate=(int)48000, channels=(int)8, channel-mask=(bitmask)0x0000000000000c3f",
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.529,
+        "process_cpu_percent": 106.42,
+        "eos": true
+      },
+      {
+        "codec": "dts",
+        "log_sha256": "10a902d38b9fe081b339ba285a4530c9e015b2ab906b845f4faf5c08f8373d24",
+        "audio_decoder": "avdec_dca",
+        "audio_decoded_buffers": 4247,
+        "audio_decoded_caps": "audio/x-raw, format=(string)S32LE, layout=(string)non-interleaved, rate=(int)48000, channels=(int)8, channel-mask=(bitmask)0x0000000000000c3f",
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.421,
+        "process_cpu_percent": 39.32,
+        "eos": true
+      },
+      {
+        "codec": "ac3",
+        "log_sha256": "b82741ed826f401bbe79ae19282212e27d579aec2af5c8c91387b39f2125d861",
+        "audio_decoder": "avdec_ac3",
+        "audio_decoded_buffers": 1415,
+        "audio_decoded_caps": "audio/x-raw, format=(string)F32LE, layout=(string)non-interleaved, rate=(int)48000, channels=(int)6, channel-mask=(bitmask)0x0000000000000c0f",
+        "decoded_frames": 1088,
+        "rendered_frames": 1088,
+        "dropped_frames": 0,
+        "elapsed_seconds": 45.393,
+        "process_cpu_percent": 22.41,
+        "eos": true
+      }
+    ],
+    "physical_observation": "User confirmed movie picture and audible audio during TrueHD loop; later reported dark picture and noises at audio start/end. A persistent dmix keeper plus 0.75-second fades removed the start/end noises in a final movie run. Native audio A/V sync was not independently accepted.",
+    "switching": {
+      "status": "failed",
+      "playbin3": "TrueHD to DTS switch caused not-linked demux error",
+      "playbin": "TrueHD to DTS switch caused not-linked demux error at about 10 seconds",
+      "normalized_pcm_selector": "All four stream IDs and buffers reached ALSA sink, but no EOS by 65 seconds; last audio PTS only 36.186 seconds. Not accepted as synchronized switching.",
+      "logs_sha256": {
+        "native-dts-playback.log": "0a6bc0a6ec8bc32c7840e6b2354cf92a8815d1e7d85468fe3f0455ee0c233ad9",
+        "native-audio-switch-legacy.log": "a44fc89baa89f28a84b45beabc2a434dbb8f491608a2356b1fb9798b5459207b",
+        "native-audio-selector-v2.log": "1f060339457d48268c6cf1455a1641de44f8f354e52bb58f2a63406766e2ae1e"
+      }
+    },
+    "persistent_analog_run": {
+      "log_sha256": "68a3b0110d5262d221a27322ba8f8f04d27e533615168401d5203385138a64f7",
+      "codec": "TrueHD decoded on M17S and downmixed to stereo",
+      "audio_device": "m17s_dmix",
+      "fade_seconds_each_end": 0.75,
+      "eos": true,
+      "decoded_frames": 1088,
+      "rendered_frames": 1088,
+      "dropped_frames": 0,
+      "elapsed_seconds": 45.384,
+      "process_cpu_percent": 112.76,
+      "service_restarts": 0,
+      "non_root_access_verified": true,
+      "ipc_owner_mode": "root:audio 0660",
+      "user_observation": "No pop at movie start or end",
+      "remaining_limit": "One analog hardware power-up pop remains when the keeper service first activates"
+    }
+  },
+  "analog_mixer_cold_boot_verified": true,
+  "hdr_sdr_experiment": {
+    "status": "visible path demonstrated; long-run and kernel stability not release-accepted",
+    "shader_stages": [
+      "PQ EOTF",
+      "Reinhard tone mapping",
+      "BT.2020 to BT.709",
+      "gamma 2.2"
+    ],
+    "capture_io_mode": "dmabuf",
+    "mmap_vdec_to_gl_fps": 0.5,
+    "dmabuf_vdec_to_gl_fps_range": "20-23",
+    "unthrottled_probe_fps_range": "54-60",
+    "synchronized_render_fps": 23.85,
+    "synchronized_render_drops": 2,
+    "with_m17s_dmix_fps": 4,
+    "with_direct_hw_audio_fps_range": "22.5-23.25",
+    "remaining_limits": [
+      "CMA can remain allocated after abnormal pipeline termination",
+      "meson_vdec codec_hevc_process_segment Oops observed during repeated experiments",
+      "full-length playback and subjective SDR image acceptance remain"
+    ]
+  }
+}

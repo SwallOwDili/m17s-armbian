@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "board": "m17s-s905x-2g-emmc8g",
+  "compatible": "amlogic,p212",
+  "dtb": "dtb/amlogic/meson-gxl-s905x-p212.dtb",
+  "emmc_boot_start_sector": 1433600,
+  "emmc_boot_sectors": 1046528,
+  "emmc_root_start_sector": 2482176,
+  "minimum_emmc_bytes": 7500000000,
+  "maximum_emmc_bytes": 8200000000,
+  "preserve_prefix_bytes": 734003200,
+  "vendor_uboot_mmc": "1:1"
+}
